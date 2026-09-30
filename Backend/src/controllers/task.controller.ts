@@ -42,7 +42,7 @@ const createTask = async (req: Request, res: Response) => {
 
 const updateTask = async (req: Request, res: Response) => {
   try {
-    const taskId = req.params.id;
+    const taskId = req.params.id as string;
     const taskData = req.body;
     const updatedTask = await TaskService.updateTask(taskData, taskId);
     return res.status(HttpStatus.OK).json({
@@ -59,7 +59,7 @@ const updateTask = async (req: Request, res: Response) => {
 
 const deleteTask = async (req: Request, res: Response) => {
   try {
-    const taskId = req.params.id;
+    const taskId = req.params.id as string;
     await TaskService.deleteTask(taskId);
     return res.status(HttpStatus.OK).json({
       success: true,
