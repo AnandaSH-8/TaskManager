@@ -66,7 +66,7 @@ const TaskModal = ({
         required
         margin="normal"
         slotProps={{ inputLabel: { shrink: true } }}
-        value={formatDateForInput(taskData?.deadline || "")}
+        value={formatDateForInput(taskData?.deadline as Date)}
         onChange={(e) => handleChange("deadline", e.target.value)}
       />
       {!isEditing && (

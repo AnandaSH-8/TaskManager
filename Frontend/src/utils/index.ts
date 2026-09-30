@@ -1,6 +1,9 @@
 export const formatDate = (date: Date) => {
-  const options = { year: "numeric", month: "2-digit", day: "2-digit" };
-  return new Date(date).toLocaleDateString(undefined, options);
+  return new Date(date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
 };
 
 export const getStatus = (deadline: Date, status: string) => {

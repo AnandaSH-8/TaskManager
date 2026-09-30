@@ -72,9 +72,9 @@ const TaskTable = ({
               </Tooltip>
             </TableCell>
             <TableCell>
-              {formatDate(task.deadline)}
+              {formatDate(task.deadline as Date)}
               <br />
-              <code>{getStatus(task.deadline, task.status)}</code>
+              <code>{getStatus(task.deadline as Date, task.status)}</code>
             </TableCell>
             <TableCell>
               <Chip
