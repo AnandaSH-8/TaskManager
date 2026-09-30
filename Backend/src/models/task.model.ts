@@ -9,8 +9,7 @@ export interface ITask extends Document {
   title: string;
   description: string;
   status: TaskStatus;
-  linkedFile?: Buffer;
-  createdOn: Date;
+  linkedFile?: { data: Buffer; contentType: string };
   deadline: Date;
 }
 
@@ -23,8 +22,10 @@ const taskSchema: Schema<ITask> = new Schema(
       enum: Object.values(TaskStatus),
       default: TaskStatus.TODO,
     },
-    linkedFile: { type: Buffer },
-    createdOn: { type: Date, default: Date.now },
+    linkedFile: {
+      data: { type: String },
+      contentType: { type: String },
+    },
     deadline: { type: Date, required: true },
   },
   {

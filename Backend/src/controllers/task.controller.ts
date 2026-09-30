@@ -20,7 +20,14 @@ const getTasks = async (req: Request, res: Response) => {
 const createTask = async (req: Request, res: Response) => {
   try {
     const taskData = req.body;
-    const newTask = await TaskService.createTask();
+    const linkedFile = req.file
+      ? {
+          data: Buffer.from(req.file.buffer),
+          contentType: req.file.mimetype,
+        }
+      : null;
+
+    const newTask = await TaskService.createTask(taskData, linkedFile);
     return res.status(HttpStatus.CREATED).json({
       success: true,
       data: newTask,
@@ -37,7 +44,7 @@ const updateTask = async (req: Request, res: Response) => {
   try {
     const taskId = req.params.id;
     const taskData = req.body;
-    const updatedTask = await TaskService.updateTask();
+    const updatedTask = await TaskService.updateTask(taskData, taskId);
     return res.status(HttpStatus.OK).json({
       success: true,
       data: updatedTask,
@@ -53,7 +60,7 @@ const updateTask = async (req: Request, res: Response) => {
 const deleteTask = async (req: Request, res: Response) => {
   try {
     const taskId = req.params.id;
-    await TaskService.deleteTask();
+    await TaskService.deleteTask(taskId);
     return res.status(HttpStatus.OK).json({
       success: true,
       message: "Task deleted successfully",
